@@ -1,18 +1,17 @@
 const express = require("express");
 const cors = require("cors");
-const dotenv = require("dotenv");
-dotenv.config();
+const connectDB = require("./config/db");
+const config = require("./config/config");
 
 const app = express();
-const PORT = process.env.PORT || 8000;
+
+connectDB();
 
 app.use(cors());
 app.use(express.json());
 
-app.listen(PORT, () => {
-  if (process.env.NODE_ENV === "production") {
-    console.log(`Server is running in production mode on port ${PORT}`);
-  } else {
-    console.log(`Server is running in development mode on port ${PORT}`);
-  }
+app.listen(config.port, () => {
+  console.log(
+    `Server is running in ${config.environment} mode on port ${config.port}`
+  );
 });
