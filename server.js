@@ -4,7 +4,6 @@ const connectDB = require("./config/db");
 const config = require("./config/config");
 
 const app = express();
-
 connectDB();
 
 app.use(cors());
