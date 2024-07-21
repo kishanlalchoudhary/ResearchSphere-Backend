@@ -3,14 +3,14 @@ const cors = require("cors");
 const morgan = require("morgan");
 const connectDB = require("./config/db");
 const config = require("./config/config");
-const globalErrorHandler = require("./middlewares/globalErrorHandler");
+const { globalErrorHandler } = require("./middlewares/globalErrorHandler");
 
 const app = express();
 connectDB();
 
 app.use(
   cors({
-    origin: config.frontendURL,
+    origin: config.frontendUrl,
     credentials: true,
   })
 );
@@ -18,10 +18,13 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const logger = morgan(config.environment === "production" ? "common" : "dev");
-app.use(logger);
+if (config.environment === "development") {
+  const logger = morgan("dev");
+  app.use(logger);
+}
 
-app.use("/api", require("./routes/healthRoutes"));
+app.use("/api/v1", require("./routes/healthCheckRoutes"));
+app.use("/api/v1/users", require("./routes/userRoutes"));
 
 app.use(globalErrorHandler);
 

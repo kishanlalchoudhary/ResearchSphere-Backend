@@ -4,7 +4,7 @@ const config = require("./config");
 const connectDB = async () => {
   try {
     const connectionInstance = await mongoose.connect(
-      `${config.mongoURI}/${config.dbName}`
+      `${config.mongoUri}${config.dbName}`
     );
     console.log(
       "MongoDB connected !! DB HOST:",

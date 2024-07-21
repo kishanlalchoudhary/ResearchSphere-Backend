@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      required: true,
+      default: "student",
       enum: ["student", "professor", "other"],
     },
     about: {
@@ -25,12 +25,14 @@ const userSchema = new mongoose.Schema(
     },
     contactNo: {
       type: String,
-      required: true,
     },
     categories: {
       type: [String],
     },
     skills: {
+      type: [String],
+    },
+    tokens: {
       type: [String],
     },
   },
