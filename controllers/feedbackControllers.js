@@ -20,7 +20,7 @@ const saveFeedback = expressAsyncHandler(async (req, res) => {
   }
 
   const feedback = await Feedback({ name, email, message });
-  feedback.save();
+  await feedback.save();
 
   return sendSuccessResponse(
     res,
@@ -37,7 +37,7 @@ const getFeedbacks = expressAsyncHandler(async (req, res) => {
   return sendSuccessResponse(
     res,
     200,
-    "Feedbacks fetched successfully. Here they are!",
+    "Feedbacks fetched successfully.",
     {
       feedbacks,
     }
