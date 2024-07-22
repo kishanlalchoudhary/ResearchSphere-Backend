@@ -42,12 +42,11 @@ const editOpportunity = expressAsyncHandler(async (req, res) => {
     return sendErrorResponse(res, 400, "All fields are required");
   }
 
-  const opportunity = await Opportunity.findById(opportunityId);
-  if (!opportunity) {
-    return sendErrorResponse(
+  if (endDate < startDate) {
+    return sendSuccessResponse(
       res,
       400,
-      "Opportunity you’re trying to edit can't be found."
+      "End date should be after the start date."
     );
   }
 
@@ -98,7 +97,7 @@ const deleteOpportunity = expressAsyncHandler(async (req, res) => {
 });
 
 const getAllOpportunities = expressAsyncHandler(async (req, res) => {
-  const opportunities = await Opportunity.find();
+  const opportunities = await Opportunity.find().populate("owner", "name");
 
   return sendSuccessResponse(res, 200, "Opportunities fetched successfully", {
     opportunities,
@@ -108,7 +107,10 @@ const getAllOpportunities = expressAsyncHandler(async (req, res) => {
 const getAllOpportunityById = expressAsyncHandler(async (req, res) => {
   const { opportunityId } = req.params;
 
-  const opportunity = await Opportunity.findById(opportunityId);
+  const opportunity = await Opportunity.findById(opportunityId).populate(
+    "owner",
+    "name"
+  );
 
   if (!opportunity) {
     return sendErrorResponse(
