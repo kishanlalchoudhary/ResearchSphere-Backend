@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/userModels");
+const User = require("../models/userModel");
 const config = require("../config/config");
-const { sendErrorResponse } = require("../utils/sendErrorResponse");
+const sendErrorResponse = require("../utils/sendErrorResponse");
 
 const authenticate = async (req, res, next) => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
@@ -35,4 +35,4 @@ const authenticate = async (req, res, next) => {
   }
 };
 
-module.exports = { authenticate };
+module.exports = authenticate;

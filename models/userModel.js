@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema(
     contactNo: {
       type: String,
     },
-    categories: {
+    domains: {
       type: [String],
     },
     skills: {

@@ -1,11 +1,11 @@
 const expressAsyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
-const User = require("../models/userModels");
+const User = require("../models/userModel");
 const config = require("../config/config");
-const { sendSuccessResponse } = require("../utils/sendSuccessResponse");
-const { sendErrorResponse } = require("../utils/sendErrorResponse");
-const { generateUserToken } = require("../utils/generateUserToken");
+const sendSuccessResponse = require("../utils/sendSuccessResponse");
+const sendErrorResponse = require("../utils/sendErrorResponse");
+const generateUserToken = require("../utils/generateUserToken");
 
 const signup = expressAsyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
@@ -64,6 +64,14 @@ const login = expressAsyncHandler(async (req, res) => {
 
   if (!email || !password) {
     return sendErrorResponse(res, 400, "All fields are required");
+  }
+
+  if (!validator.isEmail(email)) {
+    return sendErrorResponse(
+      res,
+      400,
+      "Oops! That doesn't look like a valid email address. Please try again."
+    );
   }
 
   const user = await User.findOne({ email });

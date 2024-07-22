@@ -6,4 +6,4 @@ const sendErrorResponse = (res, statusCode, message, details = {}) => {
   });
 };
 
-module.exports = { sendErrorResponse };
+module.exports = sendErrorResponse;

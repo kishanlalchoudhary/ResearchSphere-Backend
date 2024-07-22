@@ -19,7 +19,7 @@ const opportunitySchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
-    categories: {
+    domains: {
       type: [String],
     },
     skills: {
