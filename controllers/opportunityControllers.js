@@ -15,7 +15,7 @@ const createOpportunity = expressAsyncHandler(async (req, res) => {
     return sendSuccessResponse(
       res,
       400,
-      "End date should be after the start date."
+      "End date should be after the start date"
     );
   }
 
@@ -30,7 +30,7 @@ const createOpportunity = expressAsyncHandler(async (req, res) => {
   });
   await opportunity.save();
 
-  return sendSuccessResponse(res, 201, "Your opportunity has been created.");
+  return sendSuccessResponse(res, 201, "Your opportunity has been created");
 });
 
 const editOpportunity = expressAsyncHandler(async (req, res) => {
@@ -46,7 +46,7 @@ const editOpportunity = expressAsyncHandler(async (req, res) => {
     return sendSuccessResponse(
       res,
       400,
-      "End date should be after the start date."
+      "End date should be after the start date"
     );
   }
 
@@ -54,7 +54,7 @@ const editOpportunity = expressAsyncHandler(async (req, res) => {
     return sendErrorResponse(
       res,
       403,
-      "You can only edit opportunities that you have created."
+      "You can only edit opportunities that you have created"
     );
   }
 
@@ -67,7 +67,7 @@ const editOpportunity = expressAsyncHandler(async (req, res) => {
     skills,
   });
 
-  return sendSuccessResponse(res, 200, "Opportunity updated successfully.");
+  return sendSuccessResponse(res, 200, "Opportunity updated successfully");
 });
 
 const deleteOpportunity = expressAsyncHandler(async (req, res) => {
@@ -79,7 +79,7 @@ const deleteOpportunity = expressAsyncHandler(async (req, res) => {
     return sendErrorResponse(
       res,
       400,
-      "Opportunity you’re trying to delete can't be found."
+      "Opportunity you’re trying to delete can't be found"
     );
   }
 
@@ -87,13 +87,13 @@ const deleteOpportunity = expressAsyncHandler(async (req, res) => {
     return sendErrorResponse(
       res,
       403,
-      "You can only delete opportunities that you have created."
+      "You can only delete opportunities that you have created"
     );
   }
 
   await Opportunity.findByIdAndDelete(opportunityId);
 
-  return sendSuccessResponse(res, 200, "Opportunity deleted successfully.");
+  return sendSuccessResponse(res, 200, "Opportunity deleted successfully");
 });
 
 const getAllOpportunities = expressAsyncHandler(async (req, res) => {
@@ -116,14 +116,14 @@ const getAllOpportunityById = expressAsyncHandler(async (req, res) => {
     return sendErrorResponse(
       res,
       400,
-      `Opportunity with ID ${opportunityId} does not exist.`
+      `Opportunity with ID ${opportunityId} does not exist`
     );
   }
 
   return sendSuccessResponse(
     res,
     200,
-    `Opportunity with ID ${opportunityId} fetched successfully.`,
+    `Opportunity with ID ${opportunityId} fetched successfully`,
     {
       opportunity,
     }
@@ -138,7 +138,7 @@ const getMyOpportunities = expressAsyncHandler(async (req, res) => {
   return sendSuccessResponse(
     res,
     200,
-    "Your Opportunities fetched successfully",
+    "Your opportunities fetched successfully",
     {
       opportunities,
     }
@@ -155,7 +155,7 @@ const getMyOpportunityById = expressAsyncHandler(async (req, res) => {
     return sendErrorResponse(
       res,
       400,
-      `Opportunity with ID ${opportunityId} does not exist.`
+      `Opportunity with ID ${opportunityId} does not exist`
     );
   }
 
@@ -163,14 +163,14 @@ const getMyOpportunityById = expressAsyncHandler(async (req, res) => {
     return sendErrorResponse(
       res,
       403,
-      "You cannot fetch this opportunity as you did not create it."
+      "You cannot fetch this opportunity as you did not create it"
     );
   }
 
   return sendSuccessResponse(
     res,
     200,
-    `Opportunity with ID ${opportunityId} fetched successfully.`,
+    `Opportunity with ID ${opportunityId} fetched successfully`,
     {
       opportunity,
     }

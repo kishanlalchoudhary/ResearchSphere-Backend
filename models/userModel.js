@@ -17,8 +17,8 @@ const userSchema = new mongoose.Schema(
     },
     profession: {
       type: String,
-      default: "student",
-      enum: ["student", "professor", "other"],
+      default: "Student",
+      enum: ["Student", "Professor", "Other"],
     },
     about: {
       type: String,

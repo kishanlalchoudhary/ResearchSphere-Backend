@@ -1,7 +1,7 @@
+const User = require("../models/userModel");
 const expressAsyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
-const User = require("../models/userModel");
 const config = require("../config/config");
 const sendSuccessResponse = require("../utils/sendSuccessResponse");
 const sendErrorResponse = require("../utils/sendErrorResponse");
@@ -18,7 +18,7 @@ const signup = expressAsyncHandler(async (req, res) => {
     return sendErrorResponse(
       res,
       400,
-      "Oops! That doesn't look like a valid email address. Please try again."
+      "Invalid email address"
     );
   }
 
@@ -27,7 +27,7 @@ const signup = expressAsyncHandler(async (req, res) => {
     return sendErrorResponse(
       res,
       400,
-      "This email is already associated with an account. Try logging in or use another email to register."
+      "This email is already associated with an account"
     );
   }
 
@@ -52,7 +52,7 @@ const signup = expressAsyncHandler(async (req, res) => {
   return sendSuccessResponse(
     res,
     201,
-    "Welcome! Your account has been created successfully.",
+    "Your account has been created successfully",
     {
       token,
     }
@@ -70,7 +70,7 @@ const login = expressAsyncHandler(async (req, res) => {
     return sendErrorResponse(
       res,
       400,
-      "Oops! That doesn't look like a valid email address. Please try again."
+      "Invalid email address"
     );
   }
 
@@ -79,29 +79,20 @@ const login = expressAsyncHandler(async (req, res) => {
     return sendErrorResponse(
       res,
       400,
-      "We couldn't find an account with that email or username. Please try again or sign up for a new account."
+      "We couldn't find an account with this email"
     );
   }
 
   const equal = await bcrypt.compare(password, user.password);
   if (!equal) {
-    return sendErrorResponse(
-      res,
-      400,
-      "Incorrect password. Please check and try again."
-    );
+    return sendErrorResponse(res, 400, "Incorrect password");
   }
 
   const token = await generateUserToken(user._id);
 
-  return sendSuccessResponse(
-    res,
-    200,
-    "Welcome back! You have successfully logged in.",
-    {
-      token,
-    }
-  );
+  return sendSuccessResponse(res, 200, "You've been logged in successfully", {
+    token,
+  });
 });
 
 const logout = expressAsyncHandler(async (req, res) => {
@@ -109,11 +100,7 @@ const logout = expressAsyncHandler(async (req, res) => {
 
   await User.updateOne({ _id: user._id }, { $pull: { tokens: token } });
 
-  return sendSuccessResponse(
-    res,
-    200,
-    "You've been logged out successfully. Come back soon!"
-  );
+  return sendSuccessResponse(res, 200, "You've been logged out successfully");
 });
 
 module.exports = {
