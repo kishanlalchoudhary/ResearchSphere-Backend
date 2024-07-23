@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 const config = {
-  environment: process.env.NODE_ENV || "development",
+  environment: process.env.NODE_ENV || "production",
   port: process.env.PORT || 8000,
   mongoUri: process.env.MONGO_URI || "mongodb://localhost:27017/",
   dbName: process.env.DB_NAME || "researchsphere",
