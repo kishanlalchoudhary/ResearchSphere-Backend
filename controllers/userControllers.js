@@ -15,11 +15,7 @@ const signup = expressAsyncHandler(async (req, res) => {
   }
 
   if (!validator.isEmail(email)) {
-    return sendErrorResponse(
-      res,
-      400,
-      "Invalid email address"
-    );
+    return sendErrorResponse(res, 400, "Invalid email address");
   }
 
   let user = await User.findOne({ email });
@@ -52,7 +48,7 @@ const signup = expressAsyncHandler(async (req, res) => {
   return sendSuccessResponse(
     res,
     201,
-    "Your account has been created successfully",
+    "Your account have been created successfully",
     {
       token,
     }
@@ -67,20 +63,12 @@ const login = expressAsyncHandler(async (req, res) => {
   }
 
   if (!validator.isEmail(email)) {
-    return sendErrorResponse(
-      res,
-      400,
-      "Invalid email address"
-    );
+    return sendErrorResponse(res, 400, "Invalid email address");
   }
 
   const user = await User.findOne({ email });
   if (!user) {
-    return sendErrorResponse(
-      res,
-      400,
-      "We couldn't find an account with this email"
-    );
+    return sendErrorResponse(res, 404, "Account does not exist");
   }
 
   const equal = await bcrypt.compare(password, user.password);
@@ -90,7 +78,7 @@ const login = expressAsyncHandler(async (req, res) => {
 
   const token = await generateUserToken(user._id);
 
-  return sendSuccessResponse(res, 200, "You've been logged in successfully", {
+  return sendSuccessResponse(res, 200, "You have been logged in successfully", {
     token,
   });
 });
@@ -100,7 +88,7 @@ const logout = expressAsyncHandler(async (req, res) => {
 
   await User.updateOne({ _id: user._id }, { $pull: { tokens: token } });
 
-  return sendSuccessResponse(res, 200, "You've been logged out successfully");
+  return sendSuccessResponse(res, 200, "You have been logged out successfully");
 });
 
 module.exports = {

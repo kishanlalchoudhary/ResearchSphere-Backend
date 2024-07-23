@@ -4,7 +4,7 @@ const validator = require("validator");
 const sendSuccessResponse = require("../utils/sendSuccessResponse");
 const sendErrorResponse = require("../utils/sendErrorResponse");
 
-const saveFeedback = expressAsyncHandler(async (req, res) => {
+const submitFeedback = expressAsyncHandler(async (req, res) => {
   const { name, email, message } = req.body;
 
   if ((!name, !email || !message)) {
@@ -15,7 +15,7 @@ const saveFeedback = expressAsyncHandler(async (req, res) => {
     return sendErrorResponse(
       res,
       400,
-      "Oops! That doesn't look like a valid email address. Please try again."
+      "Invalid email address"
     );
   }
 
@@ -44,4 +44,4 @@ const getFeedbacks = expressAsyncHandler(async (req, res) => {
   );
 });
 
-module.exports = { saveFeedback, getFeedbacks };
+module.exports = { submitFeedback, getFeedbacks };

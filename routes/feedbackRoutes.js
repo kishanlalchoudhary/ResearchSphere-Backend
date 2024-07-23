@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const {
-  saveFeedback,
+  submitFeedback,
   getFeedbacks,
 } = require("../controllers/feedbackControllers");
 
+router.post("/", submitFeedback);
 router.get("/", getFeedbacks);
-router.post("/", saveFeedback);
 
 module.exports = router;

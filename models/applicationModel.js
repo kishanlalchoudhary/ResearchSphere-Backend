@@ -11,7 +11,8 @@ const applicationSchema = new Schema(
     status: {
       type: String,
       required: true,
-      enum: ["pending", "accepted", "rejected"],
+      default: "Pending",
+      enum: ["Pending", "Accepted", "Rejected"],
     },
     user: {
       type: Schema.Types.ObjectId,
