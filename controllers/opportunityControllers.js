@@ -185,7 +185,7 @@ const getMyOpportunityApplications = expressAsyncHandler(async (req, res) => {
     return sendErrorResponse(res, 404, "Opportunity does not exist");
   }
 
-  if (opportunity.owner.toString() === user.id) {
+  if (opportunity.owner.toString() !== user.id) {
     return sendErrorResponse(
       res,
       403,
