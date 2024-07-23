@@ -91,7 +91,24 @@ const deleteOpportunity = expressAsyncHandler(async (req, res) => {
 });
 
 const getAllOpportunities = expressAsyncHandler(async (req, res) => {
-  const opportunities = await Opportunity.find().populate("owner", "name");
+  const { domain, skill, page, limit } = req.query;
+
+  const filter = {};
+  if (domain) {
+    filter.domains = domain;
+  }
+  if (skill) {
+    filter.skills = skill;
+  }
+
+  const pageNum = Number(page) || 1;
+  const pageSize = Number(limit) || 10;
+
+  const opportunities = await Opportunity.find(filter)
+    .populate("owner", "name")
+    .sort({ createdAt: -1 })
+    .skip((pageNum - 1) * pageSize)
+    .limit(pageSize);
 
   return sendSuccessResponse(res, 200, "Opportunities fetched successfully", {
     opportunities,
@@ -117,7 +134,9 @@ const getAllOpportunityById = expressAsyncHandler(async (req, res) => {
 const getMyOpportunities = expressAsyncHandler(async (req, res) => {
   const { user } = req;
 
-  const opportunities = await Opportunity.find({ owner: user.id });
+  const opportunities = await Opportunity.find({ owner: user.id }).sort({
+    createdAt: -1,
+  });
 
   return sendSuccessResponse(
     res,
@@ -195,7 +214,9 @@ const getMyOpportunityApplications = expressAsyncHandler(async (req, res) => {
 
   const applications = await Application.find({
     opportunity: opportunityId,
-  }).populate("user", ["name", "email"]);
+  })
+    .populate("user", ["name", "email"])
+    .sort({ createdAt: -1 });
 
   return sendSuccessResponse(
     res,

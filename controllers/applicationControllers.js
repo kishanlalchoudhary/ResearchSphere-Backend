@@ -6,10 +6,9 @@ const sendErrorResponse = require("../utils/sendErrorResponse");
 const getMyApplications = expressAsyncHandler(async (req, res) => {
   const { user } = req;
 
-  const applications = await Application.find({ user: user.id }).populate(
-    "opportunity",
-    "title"
-  );
+  const applications = await Application.find({ user: user.id })
+    .populate("opportunity", "title")
+    .sort({ createdAt: -1 });
 
   return sendSuccessResponse(
     res,
@@ -25,11 +24,7 @@ const withdrawApplication = expressAsyncHandler(async (req, res) => {
 
   let application = await Application.findById(applicationId);
   if (!application) {
-    return sendErrorResponse(
-      res,
-      404,
-      "Application does not exist"
-    );
+    return sendErrorResponse(res, 404, "Application does not exist");
   }
 
   if (application.user.toString() !== user.id) {

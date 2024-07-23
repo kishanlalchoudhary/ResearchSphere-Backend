@@ -12,11 +12,7 @@ const submitFeedback = expressAsyncHandler(async (req, res) => {
   }
 
   if (!validator.isEmail(email)) {
-    return sendErrorResponse(
-      res,
-      400,
-      "Invalid email address"
-    );
+    return sendErrorResponse(res, 400, "Invalid email address");
   }
 
   const feedback = await Feedback({ name, email, message });
@@ -32,16 +28,11 @@ const submitFeedback = expressAsyncHandler(async (req, res) => {
 const getFeedbacks = expressAsyncHandler(async (req, res) => {
   const { user } = req;
 
-  const feedbacks = await Feedback.find();
+  const feedbacks = await Feedback.find().sort({ createdAt: -1 });
 
-  return sendSuccessResponse(
-    res,
-    200,
-    "Feedbacks fetched successfully.",
-    {
-      feedbacks,
-    }
-  );
+  return sendSuccessResponse(res, 200, "Feedbacks fetched successfully.", {
+    feedbacks,
+  });
 });
 
 module.exports = { submitFeedback, getFeedbacks };
