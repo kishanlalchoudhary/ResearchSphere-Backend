@@ -25,7 +25,7 @@ const getProfileById = expressAsyncHandler(async (req, res) => {
   return sendSuccessResponse(
     res,
     200,
-    `Profile with User Id ${userId} fetched successfully`,
+    `Profile fetched successfully`,
     {
       profile,
     }
