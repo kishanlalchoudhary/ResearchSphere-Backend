@@ -7,7 +7,6 @@ const config = {
   dbName: process.env.DB_NAME || "researchsphere",
   frontendUrl: process.env.FRONTEND_URL || "*",
   jwtSecretKey: process.env.JWT_SECRET_KEY,
-  loginExpires: process.env.LOGIN_EXPIRES || "30d",
   salt: Number(process.env.SALT) || 10,
 };
 
