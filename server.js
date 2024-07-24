@@ -8,7 +8,9 @@ const globalErrorHandler = require("./middlewares/globalErrorHandler");
 const app = express();
 connectDB();
 
-const whitelist = [config.frontendUrl];
+const whitelist = [
+  config.frontendUrl
+];
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -18,7 +20,6 @@ const corsOptions = {
     }
   },
 };
-
 app.use(cors(corsOptions));
 
 app.use(express.json());
