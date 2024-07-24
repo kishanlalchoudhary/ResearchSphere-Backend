@@ -1,6 +1,6 @@
 # ResearchSphere Backend
 
-**ResearchSphere** is a web-based platform designed to connect students seeking research/project opportunities with professors offering them.
+The ResearchSphere Backend provides secure and reliable server-side functionality for the **ResearchSphere** platform. Using the MVC (Model-View-Controller) architecture, it efficiently handles data and user interactions. Designed for optimal performance and scalability, the backend ensures a smooth and secure experience for all users.
 
 ## Prerequisites
 
