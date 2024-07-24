@@ -25,7 +25,7 @@ Follow these steps to set up the project locally:
    Change to the project directory:
 
    ```bash
-   cd researchsphere-backend
+   cd ResearchSphere-Backend
 
 3. **Install Dependencies**
 
@@ -40,23 +40,7 @@ Follow these steps to set up the project locally:
 
    - Copy the `env.example` file to create a `.env` file:
 
-     ```bash
-     cp env.example .env
-     ```
-
-   - Open the `.env` file and update it with your configuration details:
-
-     ```env
-     PORT=8000
-     MONGO_URI=mongodb://localhost:27017
-     DB_NAME=research-sphere
-     FRONTEND_URL=http://localhost:3000
-     JWT_SECRET_KEY=your_jwt_secret_key
-     SALT=your_salt_value
-     SMTP_HOST=smtp.your-email-provider.com
-     SMTP_USERNAME=your_email_username
-     SMTP_PASSWORD=your_email_password
-     ```
+   - Open the `.env` file and add your configuration details:
 
 5. **Start the Server**
 
